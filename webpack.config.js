@@ -3,6 +3,8 @@ const path = require('path');
 const config = require('sapper/config/webpack.js');
 const pkg = require('./package.json');
 
+const preprocess = require('svelte-preprocess');
+
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 
@@ -55,9 +57,12 @@ module.exports = {
           use: {
             loader: 'svelte-loader',
             options: {
-              css: false,
+              preprocess: preprocess(),
+              css: true,
               generate: 'ssr',
               dev,
+              onwarn: (warning, onwarn) =>
+                warning.code === 'css-unused-selector' || onwarn(warning)
             },
           },
         },
