@@ -1,60 +1,80 @@
 <script>
-	export let segment;
+	import Discord from "./Discord.svelte";
 </script>
 
-<style>
+<style lang="scss">
+    @import "materialize-css/sass/materialize";
+
 	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
+		background-color: #1c2530;
 	}
-
-	ul {
-		margin: 0;
-		padding: 0;
+	nav .sidenav-trigger {
+		cursor: pointer;
 	}
-
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
+	nav .brand-logo {
+		font-weight: 100;
+		letter-spacing: 7px;
+		white-space: nowrap;
 	}
-
-	li {
-		display: block;
-		float: left;
-	}
-
-	.selected {
-		position: relative;
-		display: inline-block;
-	}
-
-	.selected::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
+	.fas,
+	.far {
+		transform: scale(0.7);
 	}
 </style>
 
-<nav>
-	<ul>
-		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>home</a></li>
-		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>about</a></li>
+<nav id="nav_f" role="navigation">
+	<a
+		href="/#"
+		data-target="slide-out"
+		class="sidenav-trigger show-on-large"><i class="fas fa-bars" /></a>
 
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch class='{segment === "blog" ? "selected" : ""}' href='blog'>blog</a></li>
+	<a
+		href="/"
+		class="brand-logo"
+		title="Rocket Watch is not over.">rocket.watch</a>
+	<ul class="right hide-on-med-and-down">
+		<li>
+			<a class="tooltipped" href="/" data-tooltip="Homepage"><i
+					class="fas fa-home" /></a>
+		</li>
+		<li><a href="/agency/SpaceX">SpaceX</a></li>
+		<li><a href="/agency/124">ULA</a></li>
+		<li><a href="/agency/115">Ariane</a></li>
+		<li><a href="/agency/63">Roscosmos</a></li>
+		<li>
+			<a class="tooltipped" href="/agency" data-tooltip="More agencies"><i
+					class="fas fa-chevron-circle-down" /></a>
+		</li>
+		<li>
+			<a
+				class="tooltipped"
+				href="/location"
+				data-tooltip="Launch Centers"><i class="fas fa-map" /></a>
+		</li>
+		<li>
+			<a class="tooltipped" href="/rocket" data-tooltip="Rockets"><i
+					class="fas fa-rocket" /></a>
+		</li>
+		<li>
+			<a
+				class="tooltipped"
+				href="/future"
+				data-tooltip="Future launches"><i
+					class="far fa-calendar-alt" /></a>
+		</li>
+		<li>
+			<a
+				class="tooltipped"
+				href="/history"
+				data-tooltip="Historical launches"><i
+					class="fas fa-history" /></a>
+		</li>
+		<li>
+			<a class="tooltipped" href="/search" data-tooltip="Search"><i
+					class="fas fa-search" /></a>
+		</li>
+		<li>
+			<Discord />
+		</li>
 	</ul>
 </nav>
